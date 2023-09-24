@@ -1,0 +1,11 @@
+program sample()
+  begin
+    { Variables }
+    
+    char: c;
+    int: x, y, z;
+    float: f;
+    
+    { Commands } 
+    
+  end

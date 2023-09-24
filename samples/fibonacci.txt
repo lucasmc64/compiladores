@@ -1,0 +1,27 @@
+program fibonacci()
+  begin
+    { Variables }
+    
+    int: c, k, m, n, aux;
+
+    { Commands }
+
+    c := 0; { Counter }
+    k := 5; { The number we want the fibonacci of }
+    m := 1; { Fibonacci of n-1 } 
+    n := 1; { Fibonacci of n }
+
+    if c >= 2:
+      begin
+        while c != k
+          begin
+            aux := n + m;
+            m := n;
+            n := aux;
+
+            c := c + 1;
+          end
+      end
+    
+    { `n` is the answer }
+  end
