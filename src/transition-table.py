@@ -8,3 +8,6 @@ class TransitionTable:
   
   def is_final(self, state):
     return self.table.get(state).get("is_final")
+
+  def get_initial_state(self):
+    return "0"
