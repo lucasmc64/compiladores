@@ -36,11 +36,11 @@ def main():
     except getopt_error as error:
         print(error)
 
-    file = open(file_path)
+    
 
     # lexer = Lexer()
     
-    file.close()
+    
 
 if __name__ == "__main__":
     main()
