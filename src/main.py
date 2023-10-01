@@ -4,6 +4,8 @@ from argparse import ArgumentParser
 from os.path import basename, dirname, join
 
 from lexicon import Lexer
+from symbol_table import SymbolTable
+from transition_table import TransitionTable
 
 def main():
     # The first element is the script name
@@ -36,11 +38,21 @@ def main():
     except getopt_error as error:
         print(error)
 
-    
+    symbol_table = SymbolTable()
+    transition_table = TransitionTable(symbol_table)
 
-    # lexer = Lexer()
-    
-    
+    lexer = Lexer(file_path, transition_table)
+
+    while True:
+        token = lexer.get_next_token()
+
+        if token == None:
+            print("Fim do arquivo!")
+            break
+
+        print(f"{token.name} {token.attribute}")
+
+        print("\n")
 
 if __name__ == "__main__":
     main()
