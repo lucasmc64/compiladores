@@ -7,7 +7,7 @@ BUFFER_SIZE=4096
 
 class Lexer():
     _file_position = { "line": 1, "column": 0 }
-    _buffer_position = { "start": 0, "end": 0 }
+    buffer_position = { "start": 0, "end": 0 }
     _next_buffer = None
     
     def __init__(self, file_path, transition_table):
@@ -20,16 +20,16 @@ class Lexer():
 
         char = self._get_next_char()
 
-        # print(f"A - char: '{char}'")
+        print(f"A - char: '{char}'")
 
         # Ignore white spaces and line breaks
         while char != None and regex.search("[\s\t\n]", char) != None:
             self._restore_buffer_positioning()
             char = self._get_next_char()
-            # print(f"B - char: '{char}'")
+            print(f"B - char: '{char}'")
 
         while char != None:
-            if self._buffer_position["end"] >= 2 * BUFFER_SIZE:
+            if self.buffer_position["end"] >= 2 * BUFFER_SIZE:
                 print(f"{RED}Error (stack overflow): Token muito grande{RESET}")
                 print(self._file_position)
                 exit(1)
@@ -40,31 +40,27 @@ class Lexer():
                 break
 
             char = self._get_next_char()
+            print(f"C - char: '{char}'")
 
-        # print(self._buffer_position)
+        # print(self.buffer_position)
 
-        # print(self._buffer_position["start"], self._buffer_position["end"])
-        if char == None and self._buffer_position["start"] == self._buffer_position["end"]:
+        # print(self.buffer_position["start"], self.buffer_position["end"])
+        if char == None and self.buffer_position["start"] == self.buffer_position["end"]:
             # EOF
             return None
         
-        if self._buffer_position["end"] < BUFFER_SIZE or self._next_buffer == None:
-            lexeme = self._current_buffer[self._buffer_position["start"] : self._buffer_position["end"]]
-        else:
-            lexeme = self._current_buffer[self._buffer_position["start"] : BUFFER_SIZE] + self._next_buffer[: self._buffer_position["end"] - BUFFER_SIZE]
-        
-        # print(f"self._buffer_position['start']: '{self._buffer_position['start']}'")
-        # print(f"self._buffer_position['end']: '{self._buffer_position['end']}'")
+        # print(f"self.buffer_position['start']: '{self.buffer_position['start']}'")
+        # print(f"self.buffer_position['end']: '{self.buffer_position['end']}'")
         # print(f"self._current_buffer: '{self._current_buffer}'")
         # print(f"self._next_buffer: '{self._next_buffer}'")
 
-        token = self.transition_table.execute_actions(state, self._file_position, lexeme)
+        token = self.transition_table.execute_actions(state, self)
         self._restore_buffer_positioning()
 
         return token
         
     def _get_next_char(self):
-        position_to_read = self._buffer_position.get("end")
+        position_to_read = self.buffer_position.get("end")
         char = None
 
         # print(self._next_buffer)
@@ -92,12 +88,12 @@ class Lexer():
         else:
             self._file_position["column"] += 1
 
-        self._buffer_position["end"] += 1
+        self.buffer_position["end"] += 1
 
         return char
     
-    def _handle_lookahead(self, positions):
-        self._buffer_position["end"] -= positions
+    def handle_lookahead(self, positions):
+        self.buffer_position["end"] -= positions
         
     def _restore_buffer_positioning(self):
         # print(f"'{self._current_buffer}'")
@@ -107,16 +103,16 @@ class Lexer():
             self._current_buffer = self._next_buffer
             self._next_buffer = None
 
-            new_initial_position = self._buffer_position["end"] - BUFFER_SIZE
+            new_initial_position = self.buffer_position["end"] - BUFFER_SIZE
             new_initial_position = 0 if new_initial_position < 0 else new_initial_position
-            # print(f"{self._buffer_position['end']} - {BUFFER_SIZE} - {1}\n")
+            # print(f"{self.buffer_position['end']} - {BUFFER_SIZE} - {1}\n")
         else:
-            new_initial_position = self._buffer_position["end"]
+            new_initial_position = self.buffer_position["end"]
             # print("1 - new_initial_position", new_initial_position, "\n")
         
         
-        self._buffer_position["start"] = new_initial_position
-        self._buffer_position["end"] = new_initial_position
+        self.buffer_position["start"] = new_initial_position
+        self.buffer_position["end"] = new_initial_position
     
     def get_position(self):
         return self._file_position
