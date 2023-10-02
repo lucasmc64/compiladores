@@ -114,25 +114,24 @@ class TransitionTable:
         return "0"
     
     def execute_actions(self, state: str, lexer: Lexer):
-        lexer.handle_lookahead(1)
-
-        if lexer.buffer_position["end"] < BUFFER_SIZE or lexer._next_buffer == None:
-            lexeme = lexer._current_buffer[lexer.buffer_position["start"] : lexer.buffer_position["end"]]
-        else:
-            lexeme = lexer._current_buffer[lexer.buffer_position["start"] : BUFFER_SIZE] + lexer._next_buffer[: lexer.buffer_position["end"] - BUFFER_SIZE]
         
         if state == "-1":
             print(f"{RED}Error (invalid token): Token não reconhecido{RESET}")
             print(lexer.get_position())
             exit(1)
-        elif state == "7":
-            return self.symbol_table.get_token(lexeme)
         elif state == "8":
-            return self.symbol_table.get_token(lexeme)
+            lexer.handle_lookahead(1)
+            return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "9":
-            return self.symbol_table.get_token(lexeme)
-        elif state == "14":
-            return self.symbol_table.get_token(lexeme)
-        elif state == "17":
-            return self.symbol_table.get_token(lexeme)
+            return self.symbol_table.get_token(self._get_lexeme(lexer))
+        elif state == "10":
+            return self.symbol_table.get_token(self._get_lexeme(lexer))
+        
+    def _get_lexeme(self, lexer):
+        if lexer.buffer_position["end"] < BUFFER_SIZE or lexer._next_buffer == None:
+            lexeme = lexer._current_buffer[lexer.buffer_position["start"] : lexer.buffer_position["end"]]
+        else:
+            lexeme = lexer._current_buffer[lexer.buffer_position["start"] : BUFFER_SIZE] + lexer._next_buffer[: lexer.buffer_position["end"] - BUFFER_SIZE]
+        
+        return lexeme
 

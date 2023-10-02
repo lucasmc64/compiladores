@@ -20,13 +20,13 @@ class Lexer():
 
         char = self._get_next_char()
 
-        print(f"A - char: '{char}'")
+        # print(f"A - char: '{char}'")
 
         # Ignore white spaces and line breaks
         while char != None and regex.search("[\s\t\n]", char) != None:
             self._restore_buffer_positioning()
             char = self._get_next_char()
-            print(f"B - char: '{char}'")
+            # print(f"B - char: '{char}'")
 
         while char != None:
             if self.buffer_position["end"] >= 2 * BUFFER_SIZE:
@@ -34,17 +34,16 @@ class Lexer():
                 print(self._file_position)
                 exit(1)
 
+            # print(f"{state}, '{char}'")
             state = self.transition_table.move(state, char)
 
             if self.transition_table.is_final(state):
                 break
 
             char = self._get_next_char()
-            print(f"C - char: '{char}'")
 
-        # print(self.buffer_position)
 
-        # print(self.buffer_position["start"], self.buffer_position["end"])
+        # print(char, self.buffer_position["start"], self.buffer_position["end"])
         if char == None and self.buffer_position["start"] == self.buffer_position["end"]:
             # EOF
             return None
