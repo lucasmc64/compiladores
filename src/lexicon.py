@@ -19,15 +19,27 @@ class Lexer():
         state = self.transition_table.get_initial_state()
 
         char = self._get_next_char()
+        is_comment = char == "{" 
 
         # print(f"A - char: '{char}'")
 
         # Ignore white spaces and line breaks
-        while char != None and regex.search("[\s\t\n]", char) != None:
+
+        while char != None and (regex.search("[\s\t\n]", char) != None or is_comment):
             self._restore_buffer_positioning()
             char = self._get_next_char()
-            # print(f"B - char: '{char}'")
 
+            if is_comment:
+                is_comment = char != "}"
+                char = self._get_next_char()
+            else:
+                is_comment = char == "{" 
+            
+
+            # print(char, is_comment)
+            # print(char != None or char == "{", regex.search('[\s\t\n]', char) != None, is_comment)
+
+        # print(f"{state}, '{char}'")
         while char != None:
             if self.buffer_position["end"] >= 2 * BUFFER_SIZE:
                 print(f"{RED}Error (stack overflow): Token muito grande{RESET}")
@@ -36,6 +48,7 @@ class Lexer():
 
             # print(f"{state}, '{char}'")
             state = self.transition_table.move(state, char)
+            # print(f"{state}, '{char}'")
 
             if self.transition_table.is_final(state):
                 break
@@ -93,6 +106,7 @@ class Lexer():
     
     def handle_lookahead(self, positions):
         self.buffer_position["end"] -= positions
+        # TODO: Reposicionar self.file_position para infomar posição certa nas mensagens de erro
         
     def _restore_buffer_positioning(self):
         # print(f"'{self._current_buffer}'")
