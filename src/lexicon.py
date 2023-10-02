@@ -66,7 +66,7 @@ class Lexer():
         # print(f"self._current_buffer: '{self._current_buffer}'")
         # print(f"self._next_buffer: '{self._next_buffer}'")
 
-        token = self.transition_table.execute_actions(state, self)
+        token = self.transition_table.execute_actions(state, self, char == None)
         self._restore_buffer_positioning()
 
         return token
