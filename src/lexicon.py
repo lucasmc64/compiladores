@@ -55,12 +55,16 @@ class Lexer():
 
             char = self._get_next_char()
 
-
         # print(char, self.buffer_position["start"], self.buffer_position["end"])
-        if char == None and self.buffer_position["start"] == self.buffer_position["end"]:
+        if char == None:
             # EOF
-            return None
-        
+
+            if self.buffer_position["start"] == self.buffer_position["end"]:
+                return None
+            else:
+                # Process the last token
+                state = self.transition_table.move(state, "EOF")
+
         # print(f"self.buffer_position['start']: '{self.buffer_position['start']}'")
         # print(f"self.buffer_position['end']: '{self.buffer_position['end']}'")
         # print(f"self._current_buffer: '{self._current_buffer}'")
