@@ -103,7 +103,6 @@ class TransitionTable:
         "93": { "is_final": True,  "movements": {  } },
         "94": { "is_final": True,  "movements": {  } },
         "95": { "is_final": True,  "movements": {  } }
-
     }
 
     def __init__(self, symbol_table) -> None:
@@ -152,21 +151,38 @@ class TransitionTable:
             if not is_eof:
                 lexer.handle_lookahead(1)
                 
-            # print(f"EOF -- '{self._get_lexeme(lexer)}'")
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "22":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "27":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "33":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "39":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "45":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "46":
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "48":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+                
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "49":
             return self.symbol_table.get_token(self._get_lexeme(lexer))
@@ -177,12 +193,24 @@ class TransitionTable:
         elif state == "52":
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "57":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+                
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "60":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+                
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "64":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+                
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "66":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+                
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "69":
             return self.symbol_table.get_token(self._get_lexeme(lexer))
@@ -191,14 +219,29 @@ class TransitionTable:
         elif state == "72":
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "74":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+                
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "77":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+                
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "81":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+                
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "83":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+                
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "84":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+                
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "85":
             return self.symbol_table.get_token(self._get_lexeme(lexer))
@@ -207,6 +250,9 @@ class TransitionTable:
         elif state == "89":
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "90":
+            if not is_eof:
+                lexer.handle_lookahead(1)
+                
             return self.symbol_table.get_token(self._get_lexeme(lexer))
         elif state == "92":
             return self.symbol_table.get_token(self._get_lexeme(lexer))
