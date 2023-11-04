@@ -50,6 +50,42 @@ class SymbolTable:
             self._symbols[lexeme] = { "token": "id", "value": None, "type": None }
             return Token("id", None)
 
+    def set_char(self, lexeme: str) -> Token:
+        token = self.get_token(lexeme)
+
+        if token != None:
+            return token
+        else:
+            self._symbols[lexeme] = { "token": "char", "value": None, "type": None }
+            return Token("char", None)
+   
+    def set_int(self, lexeme: str) -> Token:
+        token = self.get_token(lexeme)
+
+        if token != None:
+            return token
+        else:
+            self._symbols[lexeme] = { "token": "number", "value": None, "type": "int" }
+            return Token("number", None)
+        
+    def set_frac(self, lexeme: str) -> Token:
+        token = self.get_token(lexeme)
+
+        if token != None:
+            return token
+        else:
+            self._symbols[lexeme] = { "token": "number", "value": None, "type": "frac" }
+            return Token("number", None)
+
+    def set_exp(self, lexeme: str) -> Token:
+        token = self.get_token(lexeme)
+
+        if token != None:
+            return token
+        else:
+            self._symbols[lexeme] = { "token": "number", "value": None, "type": "exp" }
+            return Token("number", None)
+
     def _was_token_registered(self, lexeme: str) -> bool:
         return lexeme in self._symbols
         
