@@ -1,4 +1,5 @@
 import production_elements as pe
+from recognized import Token
 
 class Productions:
     productions = {
@@ -26,3 +27,9 @@ class Productions:
         "expressao_p3'" : [[pe.P_EXPONENTIATION, pe.P_EXPRESSION_P4, pe.P_EXPRESSION_P3_2], []],
         "expressao_p4"  : [[pe.P_ID], [pe.P_NUMBER], [pe.P_CHAR], [pe.P_OPEN_PARENTHESES, pe.P_EXPRESSION, pe.P_CLOSE_PARENTHESES], [pe.P_MINUS, pe.P_EXPRESSION_P4]],
     }
+
+    def choose_production(self, token: Token):
+        tk_productions = self.productions[token.name]
+
+        for tk_production in tk_productions:
+            pass

@@ -6,6 +6,8 @@ from os.path import basename, dirname, join
 from lexicon import Lexer
 from symbol_table import SymbolTable
 from transition_table import TransitionTable
+from productions import Productions
+from syntactic import Syntactical
 
 def main():
     # The first element is the script name
@@ -43,16 +45,21 @@ def main():
 
     lexer = Lexer(file_path, transition_table)
 
-    while True:
-        token = lexer.get_next_token()
+    # while True:
+    #     token = lexer.get_next_token()
 
-        if token == None:
-            print("Fim do arquivo!")
-            break
+    #     if token == None:
+    #         print("Fim do arquivo!")
+    #         break
 
-        print(f"{token.name} {token.attribute}")
+    #     print(f"{token.name} {token.attribute}")
 
-        print("\n")
+    #     print("\n")
+
+    productions = Productions(lexer)
+    syntactical = Syntactical(lexer, productions)
+
+    syntactical.analysis()
 
 if __name__ == "__main__":
     main()
