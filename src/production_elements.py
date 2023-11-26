@@ -56,5 +56,5 @@ P_CONTROL_2            = ProductionElement(value="controle'",     is_terminal=Fa
 P_EXPRESSION_P2        = ProductionElement(value="expressao_p2",  is_terminal=False)
 P_EXPRESSION_P2_2      = ProductionElement(value="expressao_p2'", is_terminal=False)
 P_EXPRESSION_P3        = ProductionElement(value="expressao_p3",  is_terminal=False)
-P_EXPRESSION_P_3       = ProductionElement(value="expressao_p3'", is_terminal=False)
+P_EXPRESSION_P3_2      = ProductionElement(value="expressao_p3'", is_terminal=False)
 P_EXPRESSION_P4        = ProductionElement(value="expressao_p4",  is_terminal=False)
