@@ -6,6 +6,18 @@ program fibonacci()
 
     { Commands }
 
+    { Test repeat statement }
+    
+    repeat 
+      begin
+        a := 'a';    { Test char }
+        b := 1.1;    { Test float representation 1 }
+        b := 1.1E-2; { Test float representation 2 }
+      end
+    until 42 == 42;
+
+    { End of tests }
+
     c := 0; { Counter }
     k := 5; { The number we want the fibonacci of }
     m := 1; { Fibonacci of n-1 } 
