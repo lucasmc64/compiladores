@@ -26,10 +26,11 @@ class SymbolTable:
         "!=":      { "token": "op_rel",  "value": "NE",    "type": None },
         ">":       { "token": "op_rel",  "value": "GT",    "type": None },
         ">=":      { "token": "op_rel",  "value": "GE",    "type": None },
-        "+":       { "token": "op_rel",  "value": None,    "type": None },
-        "*":       { "token": "op_rel",  "value": None,    "type": None },
-        "/":       { "token": "op_rel",  "value": None,    "type": None },
-        "^":       { "token": "op_rel",  "value": None,    "type": None },
+        "+":       { "token": "+",  "value": None,    "type": None },
+        "-":       { "token": "-",  "value": None,    "type": None },
+        "*":       { "token": "*",  "value": None,    "type": None },
+        "/":       { "token": "/",  "value": None,    "type": None },
+        "^":       { "token": "^",  "value": None,    "type": None },
     }
 
     def get_token(self, lexeme: str) -> Token | None:
