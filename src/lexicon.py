@@ -1,6 +1,7 @@
 import re as regex
 
 from colors import RED, RESET
+from stack import Stack
 
 BUFFER_SIZE=4096
 # BUFFER_SIZE=4
@@ -9,6 +10,7 @@ class Lexer():
     _file_position = { "line": 1, "column": 0 }
     buffer_position = { "start": 0, "end": 0 }
     _next_buffer = None
+    _stack = Stack()
     
     def __init__(self, file_path, transition_table):
         self._file = open(file_path)
@@ -19,22 +21,25 @@ class Lexer():
         state = self.transition_table.get_initial_state()
 
         char = self._get_next_char()
-        is_comment = char == "{" 
+
+        if char == "{":
+            self._stack.push(char)
 
         # print(f"A - char: '{char}'")
 
         # Ignore white spaces and line breaks
 
-        while char != None and (regex.search("[\s\t\n]", char) != None or is_comment):
+        while char != None and (regex.search("[\s\t\n]", char) != None or self._stack.size() > 0):
             self._restore_buffer_positioning()
             char = self._get_next_char()
 
-            if is_comment:
-                is_comment = char != "}"
-                char = self._get_next_char()
-            else:
-                is_comment = char == "{" 
-            
+            if char == "{":
+                self._stack.push(char)
+            elif char == "}":
+                self._stack.pop()
+
+                if self._stack.size() == 0:
+                    char = self._get_next_char()
 
             # print(char, is_comment)
             # print(char != None or char == "{", regex.search('[\s\t\n]', char) != None, is_comment)
@@ -113,20 +118,14 @@ class Lexer():
         # TODO: Reposicionar self.file_position para infomar posição certa nas mensagens de erro
         
     def _restore_buffer_positioning(self):
-        # print(f"'{self._current_buffer}'")
-        # print(f"'{self._next_buffer}'")
-        
         if self._next_buffer != None:
             self._current_buffer = self._next_buffer
             self._next_buffer = None
 
             new_initial_position = self.buffer_position["end"] - BUFFER_SIZE
             new_initial_position = 0 if new_initial_position < 0 else new_initial_position
-            # print(f"{self.buffer_position['end']} - {BUFFER_SIZE} - {1}\n")
         else:
             new_initial_position = self.buffer_position["end"]
-            # print("1 - new_initial_position", new_initial_position, "\n")
-        
         
         self.buffer_position["start"] = new_initial_position
         self.buffer_position["end"] = new_initial_position
