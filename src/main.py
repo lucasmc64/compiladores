@@ -56,8 +56,8 @@ def main():
 
     #     print("\n")
 
-    productions = Productions(lexer)
-    syntactical = Syntactical(lexer, productions)
+    #productions = Productions(lexer)
+    syntactical = Syntactical(file_path, transition_table)
 
     syntactical.analysis()
 

@@ -78,6 +78,7 @@ class Lexer():
         token = self.transition_table.execute_actions(state, self, char == None)
         self._restore_buffer_positioning()
 
+        print(token.name)
         return token
         
     def _get_next_char(self):

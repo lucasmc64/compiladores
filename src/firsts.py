@@ -1,0 +1,27 @@
+class Firsts:
+    first = {
+        "funcoes": ["program"],
+        "funcoes'": ["program"],
+        "funcao": ["program"],
+        "bloco": ["begin"],
+        "variaveis": ["tipo"],
+        "tipo": ["tipo"],
+        "declaracao": ["tipo"],
+        "ids": ["id"],
+        "comando": ["id", "while", "repeat", "if"],
+        "comandos": ["id", "while", "repeat", "if"],
+        "atribuicao": ["id"],
+        "comando_bloco": ["begin", "id", "while", "repeat", "if"],
+        "condicao": ["id", "number", "char", "(", "-"],
+        "controle": ["if"],
+        "controle'": ["else"],
+        "enquanto": ["while"],
+        "repeticao": ["repeat"],
+        "expressao": ["id", "number", "char", "(", "-"],
+        "expressao'": ["+", "-", "*"],
+        "expressao_p2": ["id", "number", "char", "(", "-"],
+        "expressao_p2'": ["*", "/"],
+        "expressao_p3": ["id", "number", "char", "(", "-"],
+        "expressao_p3'": ["^"],
+        "expressao_p4": ["id", "number", "char", "(", "-"]
+    }

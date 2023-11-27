@@ -14,7 +14,7 @@ program fibonacci()
         b := 1.1;    { Test float representation 1 }
         b := 1.1E-2; { Test float representation 2 }
       end
-    until 42 == 42;
+    until 42 = 42;
 
     { End of tests }
 
@@ -23,7 +23,7 @@ program fibonacci()
     m := 1; { Fibonacci of n-1 } 
     n := 1; { Fibonacci of n }
 
-    if c >= 2:
+    if c >= 2 then
       begin
         while c != k
           begin
