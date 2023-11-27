@@ -3,6 +3,7 @@ from getopt import getopt, error as getopt_error
 from argparse import ArgumentParser
 from os.path import basename, dirname, join
 
+import derivationTree as dt
 from lexicon import Lexer
 from symbol_table import SymbolTable
 from transition_table import TransitionTable
@@ -59,7 +60,21 @@ def main():
     #productions = Productions(lexer)
     syntactical = Syntactical(file_path, transition_table)
 
-    syntactical.analysis()
+    tree = syntactical.analysis()
+
+    if tree == None:
+        print("Compilation error")
+    else:
+        while True:
+            print("No atual: " + tree.token)
+            print("Filhos: ")
+            for kid in tree.child:
+                print(kid.token , end=", ")
+            choice = int(input("ir para filho (-1 para nó pai) : "))
+            if(choice == -1):
+                tree = tree.parent
+            else:
+                tree = tree.child[choice]
 
 if __name__ == "__main__":
     main()
